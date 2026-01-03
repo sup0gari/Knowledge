@@ -13,4 +13,5 @@
 ## プロセス
 ```bash
 secedit.exe /export # Windowsのセキュリティポリシーを書きだして検査する。
+sdbinst.exe # Application Compatibility Database Installer。 古いソフトを動かすための互換性設定をインストールするツール。
 ```
