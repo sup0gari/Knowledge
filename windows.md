@@ -70,3 +70,6 @@ Set-MpPreference -DisableRealtimeMonitoring $true
 Set-MpPreference -MAPSReporting Disabled
 Set-MpPreference -SubmitSamplesConsent NeverSend
 ```
+
+## リネームセクション
+Windowsの実行ファイルにはリネームセクションという情報があり、ファイル名を変更しても元のファイル名がわかる。  
