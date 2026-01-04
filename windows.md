@@ -73,3 +73,18 @@ Set-MpPreference -SubmitSamplesConsent NeverSend
 
 ## リネームセクション
 Windowsの実行ファイルにはリネームセクションという情報があり、ファイル名を変更しても元のファイル名がわかる。  
+
+## プロセスの起動
+Powershellからcalc.exeの例  
+1. ユーザー入力  
+`powershell.exe`の入力文字列をパースし、環境変数`PATH`から`calc.exe`を見つける。`System.Management.Automation.dll`が動く。
+2. ユーザーモード（Win32 API）  
+`kernel32.dll`の`CreateProcessW`が呼ばれる。
+3. ユーザーモード（Native API）
+`ntdll.dll`の`NtCreateUserProcess`または`ZwCreateUserProcess`が呼ばれる。
+4. カーネルモード（システムコール）
+`syscall`の実行で`ntoskrnl.exe`に実行権限を渡す。カーネルはメモリ空間を確保し、`calc.exe`の実行バイナリを展開。
+5. プロセスの誕生  
+`ntdll.dll`の`LdrLoadDll`が呼ばれる。ここでプロセス生成ログがつくられる。
+6. プロセスの通知  
+カーネルの`PsSetCreateProcessNotifyRoutine`という機能により通知される。
