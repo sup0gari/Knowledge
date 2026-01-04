@@ -89,3 +89,15 @@ Powershellからcalc.exeの例
 `ntdll.dll`の`LdrLoadDll`が呼ばれる。ここでプロセス生成ログがつくられる。
 6. プロセスの通知  
 カーネルの`PsSetCreateProcessNotifyRoutine`という機能により通知される。
+
+## .sctとは
+`.sct`とはXML形式のスクリプトレットファイルで、デフォルトだとWSHがサポートしているJScript, VBScriptの実行が可能。
+```xml
+<script language="JScript">
+    // ここにJavaScriptを書く
+</script>
+
+<script language="VBScript">
+    ' ここにVBScriptを書く
+</script>
+```
