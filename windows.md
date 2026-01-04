@@ -101,3 +101,9 @@ Powershellからcalc.exeの例
     ' ここにVBScriptを書く
 </script>
 ```
+
+## 名前解決
+`C:\Windows\System32\drivers\etc\hosts`を編集する。
+```
+192.168.56.111 example.local
+```
