@@ -63,3 +63,10 @@ svchost.exe # services.exeから起動されるDLL形式のサービスを実行
 secedit.exe /export # Windowsのセキュリティポリシーを書きだして検査する。
 sdbinst.exe # Application Compatibility Database Installer。 古いソフトを動かすための互換性設定をインストールするツール。
 ```
+
+## Windows Defenderの停止
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $true
+Set-MpPreference -MAPSReporting Disabled
+Set-MpPreference -SubmitSamplesConsent NeverSend
+```
