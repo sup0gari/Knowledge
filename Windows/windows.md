@@ -109,3 +109,8 @@ Powershellからcalc.exeの例
 ```
 192.168.56.111 example.local
 ```
+
+## ロード中のDLLリストの取得
+```
+$modules = [System.Diagnostics.Process]::GetCurrentProcess().Modules
+```
