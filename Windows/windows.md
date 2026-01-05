@@ -63,6 +63,8 @@ svchost.exe # services.exeから起動されるDLL形式のサービスを実行
 conhost.exe # コンソールの出力管理。
 secedit.exe /export # Windowsのセキュリティポリシーを書きだして検査する。
 sdbinst.exe # Application Compatibility Database Installer。 古いソフトを動かすための互換性設定をインストールするツール。
+pubprn.vbs # プリンターをActive Directoryに発行（登録）するために使用されるMicrosoft提供のVBScript
+manage-bde.wsf # WindowsのBitLockerドライブ暗号化をコマンドラインから管理するためのVBScriptファイル
 ```
 
 ## Windows Defenderの停止
