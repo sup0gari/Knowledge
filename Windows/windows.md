@@ -1,4 +1,4 @@
-## Windows起動時の挙動
+=## Windows起動時の挙動
 1. カーネルロード(UEFI/BIOS)  
 マザーボードがハードウェアをチェックし、カーネル(`ntoskrnl.exe`)をメモリに読み込む。
 2. ELAM(Early Launch Anti-Malware)の起動  
@@ -114,3 +114,9 @@ Powershellからcalc.exeの例
 ```
 $modules = [System.Diagnostics.Process]::GetCurrentProcess().Modules
 ```
+
+## Windows Prefetchとは
+アプリケーションの起動を高速化するために、Windowsがプログラムの起動に必要な情報（どのファイルやメモリ領域を使うか）を事前に記録・キャッシュしておく仕組みと、その記録ファイルのこと
+
+## MFTとは
+NTFSファイルシステムで全てのファイルとフォルダのメタデータ（名前、サイズ、作成日時、ディスク上の場所など）を記録・管理する中心的なデータベース
