@@ -1,4 +1,4 @@
-=## Windows起動時の挙動
+## Windows起動時の挙動
 1. カーネルロード(UEFI/BIOS)  
 マザーボードがハードウェアをチェックし、カーネル(`ntoskrnl.exe`)をメモリに読み込む。
 2. ELAM(Early Launch Anti-Malware)の起動  
