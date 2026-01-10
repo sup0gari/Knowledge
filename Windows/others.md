@@ -23,3 +23,6 @@ Set-MpPreference -DisableBlockAtFirstSeen $true
 ```
 192.168.56.111 example.local
 ```
+
+## 特定フォルダのセキュリティ除外
+`Add-MpPreference -ExclusionPath "C:\tools"`
