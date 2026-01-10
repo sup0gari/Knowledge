@@ -15,48 +15,8 @@ Session Manager(`smss.exe`)が起動し、`lsass.exe`, `services.exe`, `wininit.
 ## カーネルモード(Kernel Mode/Ring0)
 OSの中枢が動く無制限のエリア。カーネル(`ntoskrnl.exe`)やデバイスドライバが動く。CPUやメモリのすべてのリソースにアクセスできる。クラッシュした際はブルースクリーン(BSOD)になり、システム全体が強制終了する。
 
-## Windows Defenderの停止
-```powershell
-Set-MpPreference -DisableRealtimeMonitoring $true
-Set-MpPreference -MAPSReporting Disabled
-Set-MpPreference -SubmitSamplesConsent NeverSend
-```
-
 ## リネームセクション
 Windowsの実行ファイルにはリネームセクションという情報があり、ファイル名を変更しても元のファイル名がわかる。  
-
-## プロセスの起動
-Powershellからcalc.exeの例  
-1. ユーザー入力  
-`powershell.exe`の入力文字列をパースし、環境変数`PATH`から`calc.exe`を見つける。`System.Management.Automation.dll`が動く。
-2. ユーザーモード（Win32 API）  
-`kernel32.dll`の`CreateProcessW`が呼ばれる。
-3. ユーザーモード（Native API）
-`ntdll.dll`の`NtCreateUserProcess`または`ZwCreateUserProcess`が呼ばれる。
-4. カーネルモード（システムコール）
-`syscall`の実行で`ntoskrnl.exe`に実行権限を渡す。カーネルはメモリ空間を確保し、`calc.exe`の実行バイナリを展開。
-5. プロセスの誕生  
-`ntdll.dll`の`LdrLoadDll`が呼ばれる。ここでプロセス生成ログがつくられる。
-6. プロセスの通知  
-カーネルの`PsSetCreateProcessNotifyRoutine`という機能により通知される。
-
-## .sctとは
-`.sct`とはXML形式のスクリプトレットファイルで、デフォルトだとWSHがサポートしているJScript, VBScriptの実行が可能。
-```xml
-<script language="JScript">
-    // ここにJavaScriptを書く
-</script>
-
-<script language="VBScript">
-    ' ここにVBScriptを書く
-</script>
-```
-
-## 名前解決
-`C:\Windows\System32\drivers\etc\hosts`を編集する。
-```
-192.168.56.111 example.local
-```
 
 ## ロード中のDLLリストの取得
 ```
@@ -69,11 +29,4 @@ $modules = [System.Diagnostics.Process]::GetCurrentProcess().Modules
 ## MFTとは
 NTFSファイルシステムで全てのファイルとフォルダのメタデータ（名前、サイズ、作成日時、ディスク上の場所など）を記録・管理する中心的なデータベース
 
-## PPL（Protected Process Light）とは
-一般的なプロセスやPPLでないプロセスからのメモリの操作、デバッグ、または強制終了といった操作を受け付けない。この機能によりLsassダンプなどから守ることができる。
 
-## 特定フォルダのセキュリティ除外
-`Add-MpPreference -ExclusionPath "C:\tools"`
-
-## DSEとは
-Driver Signature Enforcementの略。署名のないカーネルドライバのロードは許可しないセキュリティ機能。
