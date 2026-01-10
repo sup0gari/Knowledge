@@ -120,3 +120,6 @@ $modules = [System.Diagnostics.Process]::GetCurrentProcess().Modules
 
 ## MFTとは
 NTFSファイルシステムで全てのファイルとフォルダのメタデータ（名前、サイズ、作成日時、ディスク上の場所など）を記録・管理する中心的なデータベース
+
+## PPL（Protected Process Light）とは
+一般的なプロセスやPPLでないプロセスからのメモリの操作、デバッグ、または強制終了といった操作を受け付けない。この機能によりLsassダンプなどから守ることができる。
