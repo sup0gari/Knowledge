@@ -26,3 +26,8 @@ Set-MpPreference -DisableBlockAtFirstSeen $true
 
 ## 特定フォルダのセキュリティ除外
 `Add-MpPreference -ExclusionPath "C:\tools"`
+
+## ロード中のDLLリストの取得
+```
+$modules = [System.Diagnostics.Process]::GetCurrentProcess().Modules
+```
