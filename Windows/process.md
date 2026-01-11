@@ -30,4 +30,5 @@ secedit.exe /export # Windowsのセキュリティポリシーを書きだして
 sdbinst.exe # Application Compatibility Database Installer。 古いソフトを動かすための互換性設定をインストールするツール。
 pubprn.vbs # プリンターをActive Directoryに発行（登録）するために使用されるMicrosoft提供のVBScript
 manage-bde.wsf # WindowsのBitLockerドライブ暗号化をコマンドラインから管理するためのVBScriptファイル
+mofcomp.exe # .mofファイルを読み取り、WMIリポジトリが理解できるようにコンパイルする
 ```
