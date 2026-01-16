@@ -32,3 +32,9 @@ pubprn.vbs # プリンターをActive Directoryに発行（登録）するため
 manage-bde.wsf # WindowsのBitLockerドライブ暗号化をコマンドラインから管理するためのVBScriptファイル
 mofcomp.exe # .mofファイルを読み取り、WMIリポジトリが理解できるようにコンパイルする
 ```
+
+## dll
+### kernel32.dll
+`OpenProcess`, `CloseHandle`
+### Psapi.dll
+`EnumProcess`, `EnumProcessModule`, `GetModuleBaseName`
