@@ -13,6 +13,7 @@ sed '1d' access.log # 1行目のみ表示
 sed '/TEST/!d' access.log # TESTを含む行以外を非表示
 sed '/TEST/d' access.log # TESTを含む行を非表示
 sed -e 's/\[//g' -e 's/\]//g' access.log # -eで連結し、[と]を非表示にする。
+sed '8,11s/^/    /' access.log # 8行目から11行目にマッチ
 ```
 
 ## pcregrep
