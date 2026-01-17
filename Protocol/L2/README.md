@@ -8,9 +8,11 @@
 IPとMACアドレスを紐づけているテーブル
 ```bash
 # Windows
-arp -d *
+arp -a # arpテーブル表示
+arp -d * # arpテーブル削除
 # Linux
-ip -s -s neigh flush all
+ip neigh show # arpテーブル表示
+ip -s -s neigh flush all # arpテーブル削除
 ```
 
 ## MACアドレスとは
