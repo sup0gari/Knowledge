@@ -28,6 +28,19 @@ Set-MpPreference -DisableBlockAtFirstSeen $true
 `Add-MpPreference -ExclusionPath "C:\tools"`
 
 ## ロード中のDLLリストの取得
-```
+```powershell
 $modules = [System.Diagnostics.Process]::GetCurrentProcess().Modules
+```
+
+## FW確認
+```powershell
+# FWルール表示
+netsh advfirewall firewall show rule name=all
+# ホストオンリーアダプターに対してFWを無効にする
+netsh advfirewall firewall add rule name="hostonlyadaptor" dir=in action=allow remoteip=192.168.56.0/24
+```
+
+## ポート状態表示
+```powershell
+netstat -abno
 ```
