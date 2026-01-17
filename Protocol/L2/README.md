@@ -4,6 +4,15 @@
 ## ARPとは
 知っているIPから知らないMACアドレスを対応付けるプロトコル。ARP Requestで任意のIPに紐づくMACアドレスを要求し、ARP Replyで応答する。
 
+## ARPテーブルとは
+IPとMACアドレスを紐づけているテーブル
+```bash
+# Windows
+arp -d *
+# Linux
+ip -s -s neigh flush all
+```
+
 ## MACアドレスとは
 ネットワークカード(NIC)製造時に書き込まれる48bitの識別番号。同じネットワーク内で特定の機器を探すために使われる。
 
