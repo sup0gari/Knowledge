@@ -23,4 +23,5 @@ pcregrep -o1 'PID:(\d+)' access.log # 一致した中で一つ目のカッコ内
 pcregrep -v 'SUCCESS' access.log # 一致したもの以外の行を抽出
 (?s) # .に改行を含ませる
 .*?ABC # 次に出てきたABCまで一致
+-i # 大文字小文字を区別しない
 ```
