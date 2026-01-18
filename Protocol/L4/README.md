@@ -27,4 +27,5 @@ tcpdump -i eth0 udp port 53 # DNS通信のみ傍受
 [.] ACK
 [P.] PSH, ACK
 [F.] FIN, ACK
+[R.] RST, ACK
 ```
