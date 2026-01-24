@@ -69,3 +69,15 @@ bloodhound-python -d <Domain> -u <User> -p <Password> -ns <DNS IP> -c All # 認�
 bloodhound # 起動 8080ポートを使用
 ```
 
+# Certipy
+ADCSの脆弱性を調査、列挙、および悪用するために設計されたツール
+```bash
+certipy-ad find -u <User>@<Target> -hashes :<NTLM hash> -stdout -vulnerable
+certipy-ad find -u '<User>@<Target>' -p '<password>' -target <Target> -dc-ip <Target> -stdout -vulnerable
+```
+
+# Procdump
+Sysinternalsツールの一つでプロセスのメモリの中身を、ダンプファイルとして書き出すためのツール。
+```bash
+procdump.exe -ma <pid> <output>.dmp -accepteula
+```
