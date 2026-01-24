@@ -117,6 +117,12 @@ echo -n <Payload> | base64 -d
 ```
 xxd -r -p <Hex file> > <ASCII File>
 ```
+## zip file
+```
+unzip <File>
+unzip <File> -d <Directory>
+7z x <File>
+```
 # Assembly
 # Others
 ## SSH
