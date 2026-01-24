@@ -39,6 +39,10 @@ dir /S /AS C:\Users\<User>\AppData\Roaming\Microsoft\Vault # あまり使われ�
 dir /S /AS C:\Users\<User>\AppData\Roaming\Microsoft\Credentials # ドメインネットワーク内の共有フォルダのアクセス権や/savecredなどのデータ
 dir /S /AS C:\Users\<User>\AppData\Roaming\Microsoft\Protect # ユーザーごとのデータのmasterkey
 ```
+## /savecredの悪用
+`cmdkey /list`で確認できた場合、下記のコマンドでそのパスワードを使用して実行。  
+`runas /user:<ユーザー> /savecred "<コマンド>"`
+
 # attrib
 ```
 attrib -H -S <Hidden files> # 隠しとシステム属性を解除
