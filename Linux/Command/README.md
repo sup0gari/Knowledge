@@ -1,3 +1,23 @@
+# Discovery
+```bash
+id
+hostname -I
+cat /etc/passwd
+pwd
+ls # ファイル一覧を表示
+ls -la # ファイル一覧を権限も含めて表示
+cat # ファイルの中身を表示
+strings # ファイルの中身の文字列のみ表示
+stat # ファイル統計を表示
+ss -tlunp # ポート情報の表示
+crontab -l
+cat /etc/crontab
+ps aux # プロセス情報
+grep -R -e "password" /var/log
+checksec --file=file_name
+readelf -l orvflw | grep STACK # GNU_STACKにEがあればNX無効
+```
+
 # shell
 シェル関連のコマンド。
 ```bash
@@ -32,6 +52,19 @@ echo "<IP> <Domain>" | sudo tee -a /etc/hosts
 ```
 wget <URL>
 curl <URL> -o <Path>
+```
+
+# find
+```bash
+find <検索場所のパス> <オプション> <検索ファイル名>
+-group <グループ名>
+-type <ファイル形式> # ファイルならf, ディレクトリならd
+-name <検索したいワード>
+-iname <検索したいワード> # 大文字小文字を区別しない
+-perm -4000 # SUID
+-perm -2000 # SGID
+-user <ユーザー名>
+-exec <コマンド> # 検索内容に対してコマンド実行した結果を表示
 ```
 
 # SUID, SGID file search
