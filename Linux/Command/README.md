@@ -197,8 +197,20 @@ root       1027  0.0  0.1  26416  1676 ?        Ss   04:55   0:00 /usr/bin/tmux 
 tmux -S /.devs/dev_sess # rootターミナル起動
 ```
 
-# keepassとは
+# keepass
 ローカル管理型のオープンソース・パスワードマネージャー。`.kdbx`で保存される。
 ```bash
 keepass2 <.kdbx>
+```
+
+# dig
+DNSサーバーにドメイン名に関する情報を問い合わせるためのコマンド。
+```bash
+dig @<Target> <Domain> AXFR # 成功すると内部ネットワーク構成情報がわかる
+```
+
+# nslookup
+ドメイン名とIPアドレスを変換するコマンド
+```bash
+nslookup <Target> <DNS>
 ```
