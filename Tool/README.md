@@ -62,6 +62,10 @@ impacket-secretsdump.py <Domain>/<User>@<Target> # DCSync
 impacket-secretsdump.py -just-dc <Domain>/<User>@<Target> # DCSync
 ```
 
-
-
+# bloodhound
+Active Directory内の権限関係を可視化するツール。
+```bash
+bloodhound-python -d <Domain> -u <User> -p <Password> -ns <DNS IP> -c All # 認証済みユーザーを使用してjsonファイルを生成。このファイルをブラウザ経由でGUIにアップロードする。
+bloodhound # 起動 8080ポートを使用
+```
 
