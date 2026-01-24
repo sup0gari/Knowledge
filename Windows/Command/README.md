@@ -1,3 +1,22 @@
+# Discovery
+```powershell
+whoami /priv
+cmdkey /list
+Get-Process
+Get-Process -name <Process>
+ps
+tasklist /v
+netstat -ano
+```
+
+# icacls
+```powershell
+icacls <File / Directory>
+(I) # 親フォルダの設定がそのファイルに継承される。
+(F) # フルコントロール
+(RX) # 読み取りと実行
+```
+
 # File
 ファイル操作関連のコマンド。
 ```bash
@@ -9,17 +28,31 @@ rmdir <Directory>
 del <File>
 rd /s /q <Directory> # サブフォルダ含め、強制削除
 -force # 強制削除
+get-childitem -force # すべてのファイル表示
+dir -force # すべてのファイル表示
 ```
+
+# sc
+```powershell
+sc.exe start <Service>
+sc.exe stop <Service>
+sc.exe query <Service> # サービスの状態
+sc.exe config <Service> binPath="<Path / Command>" # binPathの変更
+sc.exe qc <Service> # サービス詳細確認
+```
+
 # File download
 ```
 wget <URL> -o <File path>
 iwr -uri <URL> -o <File path>
 ```
+
 # iex
 ファイルをダウンロードせずにメモリ上で実行する。
 ```
 iex (new-object net.webclient).downloadstring('<URL>')
 ```
+
 # net
 ```powershell
 net user # 全ユーザー表示
