@@ -7,6 +7,7 @@ sudo -i # root
 su - <User> # ユーザーの切り替え
 sudo -u <User> <Command> # 指定したユーザーとしてsudoでコマンドを実行
 ```
+
 # shell stabilization
 ## python3によるシェル安定化
 ```
@@ -20,16 +21,19 @@ stty raw -echo
 fg
 export TERM=xterm
 ```
+
 # Local name solution
 ブラウザなどでドメインの名前解決の設定をするコマンド。
 ```
 echo "<IP> <Domain>" | sudo tee -a /etc/hosts
 ```
+
 # File download
 ```
 wget <URL>
 curl <URL> -o <Path>
 ```
+
 # SUID, SGID file search
 ```bash
 find / -perm -4000 -type f -exec ls -l {} \; 2>/dev/null # SUID
@@ -51,24 +55,29 @@ cat << 'EOF' > hello.txt
 Hello, $NAME.
 EOF
 ```
+
 # Edit environment variables
 ```bash
 export PATH=<YOUR PATH>
 ```
+
 # Temp folder creation
 ```bash
 mktemp -d # /tmp配下にディレクトリを作成する
 cd $(mktemp -d)
 ```
+
 # echo
 ```bash
 -e # 特殊文字を解釈する
 ```
+
 # grep
 ```bash
 grep -E 'linux|windows' # linux, windowsどちらかを含む行を抽出
 grep -v 'linux' # linuxを含む行以外を抽出
 ```
+
 # sed
 ```bash
 sed '3q' access.log # 3行目まで表示して終了
@@ -80,7 +89,8 @@ sed '8,11s/^/    /' access.log # 8行目から11行目にマッチ
 sed -n '1,3p' access.log # 1~3行目を表示
 sed -n '/\/login\.php/p' access.log　# マッチした行のみ表示
 ```
-## pcregrep
+
+# pcregrep
 ```bash
 pcregrep -o '0x[0-9a-fA-F]+' access.log # 一致した箇所のみ抽出
 pcregrep -o1 'PID:(\d+)' access.log # 一致した中で一つ目のカッコ内のみ抽出
@@ -91,6 +101,7 @@ pcregrep -v 'SUCCESS' access.log # 一致したもの以外の行を抽出
 -M # 複数行に渡って一致させる
 -A 1 # マッチした後の一行を表示
 ```
+
 # nc file transfer
 ```bash
 # 受信側
@@ -98,6 +109,7 @@ nc -lp 1234 > <File>
 # 送信側
 nc <Receiver IP> 1234 < <File>
 ```
+
 # base64 file transfer
 ```bash
 # 送信側
@@ -105,6 +117,7 @@ base64 <File> # 出力された文字列をコピー => base64 encoded string
 # 受信側
 base64 -d <base64 encoded string> > <File>
 ```
+
 # obfuscation
 ```bash
 ${IFS} # スペースの代わり
@@ -112,16 +125,19 @@ $(<Command>) # コマンドインジェクションなどで使用
 echo <base64 encoded string>|base64 -d|bash
 echo -n <Payload> | base64 -d
 ```
+
 # convert to hex
 ```
 xxd -r -p <Hex file> > <ASCII File>
 ```
+
 # zip file
 ```
 unzip <File>
 unzip <File> -d <Directory>
 7z x <File>
 ```
+
 # mdb
 Microsoft Access Databaseという古いバージョンのデータベース形式
 ```
@@ -131,8 +147,15 @@ mdb-export <File> <Table>
 mdb-sql <File> # SQLクエリを使用可能にする
 mdb-sql -d '|' -P <File> # SQLクエリで見やすくパイプ区切りにする
 ```
+
 # pst
 Outlookで送受信したメールや、連絡先などのデータをローカルで保存するためのファイル形式。
 ```
 readpst <File>
+```
+
+# keepassとは
+ローカル管理型のオープンソース・パスワードマネージャー。`.kdbx`で保存される。
+```bash
+keepass2 <.kdbx>
 ```
