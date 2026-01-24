@@ -1,11 +1,9 @@
 # 目次
 ## [Linux](./Linux/README.md)  
-- [Assembly](./Linux/Assembly/README.md)
 - [Command](./Linux/Command/README.md)
 - [Group](./Linux/Group/README.md)
 - [Others](./Linux/Others/README.md)
 ## [Windows](./Windows/README.md)  
-- [Assembly](./Windows/Assembly/README.md)
 - [Active Directory](./Windows/Active%20Directory/README.md)
 - [Command](./Windows/Command/README.md)
 - [Group](./Windows/Group/README.md)
