@@ -7,6 +7,7 @@ Get-Process -name <Process>
 ps
 tasklist /v
 netstat -ano
+reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /s | findstr "AutoAdminLogon DefaultUserName DefaultPassword DefaultDomainName"
 ```
 
 # icacls
@@ -82,4 +83,11 @@ dir /S /AS C:\Users\<User>\AppData\Roaming\Microsoft\Protect # ユーザーご�
 # attrib
 ```
 attrib -H -S <Hidden files> # 隠しとシステム属性を解除
+```
+
+# 特定ユーザーへのパスワードスプレー
+```powershell
+$pass = convertto-securestring -asplain -force -string "<Password>";
+$cred = new-object -typename system.management.automation.pscredential -argumentlist "<Domain\User>", $pass;
+invoke-command -computername localhost -scriptblock { whoami } -credential $cred;
 ```
