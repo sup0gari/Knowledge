@@ -122,3 +122,17 @@ unzip <File>
 unzip <File> -d <Directory>
 7z x <File>
 ```
+# mdb
+Microsoft Access Databaseという古いバージョンのデータベース形式
+```
+mdb-tables <File> # テーブルを表示
+mdb-schema <File>
+mdb-export <File> <Table>
+mdb-sql <File> # SQLクエリを使用可能にする
+mdb-sql -d '|' -P <File> # SQLクエリで見やすくパイプ区切りにする
+```
+# pst
+Outlookで送受信したメールや、連絡先などのデータをローカルで保存するためのファイル形式。
+```
+readpst <File>
+```
