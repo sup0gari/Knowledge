@@ -98,3 +98,25 @@ invoke-command -computername localhost -scriptblock { whoami } -credential $cred
 ```powershell
 msiexec /quiet /qn /i setup.msi
 ```
+
+# Windows Defender
+停止コマンド
+```powershell
+Set-MpPreference -DisableBehaviorMonitoring $true
+Set-MpPreference -DisableIntrusionPreventionSystem $true
+Set-MpPreference -DisableIOAVProtection $true
+Set-MpPreference -DisableBlockAtFirstSeen $true
+```
+
+# 特定フォルダのセキュリティ除外
+```powershell
+Add-MpPreference -ExclusionPath "C:\tools"
+```
+
+# FW
+```powershell
+# FWルール表示
+netsh advfirewall firewall show rule name=all
+# ホストオンリーアダプターに対してFWを無効にする
+netsh advfirewall firewall add rule name="hostonlyadaptor" dir=in action=allow remoteip=192.168.56.0/24
+```
