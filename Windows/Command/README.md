@@ -4,7 +4,10 @@
 new-item <File>
 "" > <File>
 remove-item <File>
+remove-item <Directory> -recurse # サブフォルダ、隠しファイルなどを含める
 rmdir <Directory>
+del <File>
+rd /s /q <Directory> # サブフォルダ含め、強制削除
 -force # 強制削除
 ```
 # File download
