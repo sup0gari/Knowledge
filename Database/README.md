@@ -50,5 +50,14 @@ mysql -h <Target> -P <Port> -u <User> -p
 mysql -u <User> -p<Password> -e '<Query>;'
 ```
 # PostgreSQL
+## Default account
+postgres
+## Default database
+postgres
+## Default Port
+5432
+## Connection
+```
+psql -h <Target> -U <User> -p <Port>
+```
 # Redis
-# MongoDB
