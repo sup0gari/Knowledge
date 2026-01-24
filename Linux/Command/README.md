@@ -13,6 +13,7 @@ ss -tlunp # ポート情報の表示
 crontab -l
 cat /etc/crontab
 ps aux # プロセス情報
+sudo -l
 grep -R -e "password" /var/log
 checksec --file=file_name
 readelf -l orvflw | grep STACK # GNU_STACKにEがあればNX無効
