@@ -8,6 +8,8 @@ ps
 tasklist /v
 netstat -ano
 reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /s | findstr "AutoAdminLogon DefaultUserName DefaultPassword DefaultDomainName"
+reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated # 0x1
+reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated # 0x1
 ```
 
 # icacls
@@ -90,4 +92,9 @@ attrib -H -S <Hidden files> # 隠しとシステム属性を解除
 $pass = convertto-securestring -asplain -force -string "<Password>";
 $cred = new-object -typename system.management.automation.pscredential -argumentlist "<Domain\User>", $pass;
 invoke-command -computername localhost -scriptblock { whoami } -credential $cred;
+```
+
+# msi
+```powershell
+msiexec /quiet /qn /i setup.msi
 ```
