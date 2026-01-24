@@ -109,3 +109,8 @@ impacket-dacledit -action 'write' -principal '<WriteOwner User>' -target '<User>
 # パスワード変更
 bloodyAD -d <Domain> --dc-ip <IP> -u '<WriteOwner User>' -p '<Password>' set password '<User>' 'Password123!'
 ```
+
+# SPNユーザー検索
+```powershell
+Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | Select Name, ServicePrincipalName # SPNを持つユーザー列挙
+```
