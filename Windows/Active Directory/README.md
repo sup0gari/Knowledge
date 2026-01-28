@@ -114,3 +114,13 @@ bloodyAD -d <Domain> --dc-ip <IP> -u '<WriteOwner User>' -p '<Password>' set pas
 ```powershell
 Get-ADUser -Filter {ServicePrincipalName -ne "$null"} -Properties ServicePrincipalName | Select Name, ServicePrincipalName # SPNを持つユーザー列挙
 ```
+
+# ADCS
+ADCSとは組織内専用のCAを作るためのWindows Serverの機能。  
+`certipy-ad`でスキャンして脆弱な証明書があった場合、以下の要素が重要。
+1. Enrollee Supplies Subject : True  
+SAN(Subject Alternative Name)を任意のユーザーで申請可能。
+2. Enrollment Rights: <Domain>/Domain Users  
+ドメイン参加ユーザーであれば申請可能。
+3. Extended Key Usage : Client Authentication  
+証明書をシステムへのログインに使用できる。
