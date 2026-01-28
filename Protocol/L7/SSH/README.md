@@ -10,6 +10,10 @@ id_rsa.pub, id_dsa.pub, id_ed25519.pub`
 # 公開鍵登録パス  
 ~/.ssh/authorized_keys
 ```
+
+## 証明書チェック
+openssl s_client -connect <Domain>:<Port> -servername <Domain> | openssl x509 -noout -text
+
 ## Error
 ```bash
 no mutual signature supported # 署名ルールが一致しないときのエラー
@@ -71,3 +75,4 @@ ls # rootとroot.pubがあるのを確認
 curl -X PUT localhost:1337/root/.ssh/authorized_keys -d "$(cat root.pub)" # WebDAV PUTメソッドで公開鍵を登録
 ssh -i root root@localhost
 ```
+
