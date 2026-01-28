@@ -29,6 +29,7 @@ gpp-decrypt <cpassword>
 hashcat -m 3200 <File> <Wordlist> # bcrypt
 hashcat -a 0 -m 5200 <File> <Wordlist> # psafe3
 hashcat -a 0 -m 18200 <File> <Wordlist>
+hashcat -m 5600 <File> <Wordlist> # NTLMv2
 ```
 
 # hashid
@@ -295,5 +296,6 @@ sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms "<D
 sudo responder -I tun0
 cat /usr/share/responder/logs/Responder-Session.log # 取得したハッシュ履歴
 ```
+
 
 
