@@ -122,6 +122,8 @@ sed -e 's/\[//g' -e 's/\]//g' access.log # -eで連結し、[と]を非表示に
 sed '8,11s/^/    /' access.log # 8行目から11行目にマッチ
 sed -n '1,3p' access.log # 1~3行目を表示
 sed -n '/\/login\.php/p' access.log　# マッチした行のみ表示
+sed '1,3d' access.log # 1~3行目を非表示
+sed '1~2d' access.log # 1行目から2行目置き(1,3,5)に表示
 ```
 
 # pcregrep
