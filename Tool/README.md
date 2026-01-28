@@ -289,4 +289,10 @@ SQL injectionの脆弱性スキャンツール。
 sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms "<DB>" --dump-all
 ```
 
+# Responder
+
+```bash
+sudo responder -I tun0
+cat /usr/share/responder/logs/Responder-Session.log # 取得したハッシュ履歴
+```
 
