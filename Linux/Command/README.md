@@ -214,3 +214,10 @@ dig @<Target> <Domain> AXFR # 成功すると内部ネットワーク構成情�
 ```bash
 nslookup <Target> <DNS>
 ```
+
+# wc
+行数カウント
+```
+wc -l <File>
+cat <File> | wc -l
+```
