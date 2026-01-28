@@ -290,9 +290,10 @@ sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms "<D
 ```
 
 # Responder
-
+ローカルネットワーク内で認証情報の窃取や中間者攻撃を行うツール。
 ```bash
 sudo responder -I tun0
 cat /usr/share/responder/logs/Responder-Session.log # 取得したハッシュ履歴
 ```
+
 
