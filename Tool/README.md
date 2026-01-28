@@ -285,5 +285,6 @@ windapsearch -m "Remote Management Users" -d <Domain> --dc-ip <Target> -u '<User
 # sqlmap
 SQL injectionの脆弱性スキャンツール。
 ```
-sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms <DB> --dump
+sqlmap -u "<Target>" --data "<Parameters>" --level 3 --risk 3 --batch --dbms "<DB>" --dump-all
 ```
+
