@@ -75,6 +75,11 @@ GMSAアカウントのパスワードの読み取り権限
 DCにアクセスするユーザーのためのサービスチケットの要求権限
 ## GenericAll
 パスワードを含むすべての属性の変更権限
+### 任意のユーザーを任意のグループへ追加する。
+任意のグループに対して`GenericAll`を持っていることとする。
+```bash
+bloodyAD -u '<User>' -p '<Password>' -d <Domain> --host <Target> add groupMember '<Group>' <User to add>
+```
 ## ForceChangePassword
 以前のパスワードを知らずにパスワードを変更できる権限
 ### GenericAll, ForceChangePasswordを使用したパスワード変更
