@@ -235,3 +235,9 @@ cat auth.log | cut -d ' ' -f 5 # -dは区切り文字、-fは区切ったあと�
 ```
 cat auth.log | sort | uniq
 ```
+
+# tr
+変換
+```
+tr - d 'aaa' # aaaを削除
+```
