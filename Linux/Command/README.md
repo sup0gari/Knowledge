@@ -223,3 +223,15 @@ nslookup <Target> <DNS>
 wc -l <File>
 cat <File> | wc -l
 ```
+
+# cut
+切り取り
+```
+cat auth.log | cut -d ' ' -f 5 # -dは区切り文字、-fは区切ったあと何番目のフィールドを出力するか
+```
+
+# sort, uniq
+並び替えと重複削除
+```
+cat auth.log | sort | uniq
+```
