@@ -45,6 +45,8 @@ hashid '<ハッシュ>'
 john <File> -w=<Wordlist> # 基本
 --format=<Format> # フォーマット
  raw-md5 # md5ハッシュ
+ raw-sha1 # sha1
+ raw-sha256 # sha256
  md5crypt # $1$から始まるmd5
 --fork=4 # 4スレッドで実行
 ```
