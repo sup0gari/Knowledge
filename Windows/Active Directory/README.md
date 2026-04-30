@@ -92,7 +92,7 @@ SPNを含む属性変更権限
 ### GenericWriteを使用したSPN付与
 ```powershell
 $pass = convertto-securestring "<GenericWrite User Password>" -Asplain -Force
-$cred = new-object system.management.automation.pscredential ("<Domain>\<GenericWrite User Password>", $pass)
+$cred = new-object system.management.automation.pscredential ("<Domain>\<GenericWrite User>", $pass)
 Set-ADUser -Identity <SPNを付与するユーザー> -ServicePrincipalNames @{Add="<HTTP>/<anything>"} -Credential $cred # webサーバーに紐づくサービスアカウントにするためのSPNの付与
 ```
 ## GetChanges
